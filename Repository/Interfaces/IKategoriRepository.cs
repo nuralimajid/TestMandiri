@@ -8,5 +8,6 @@ namespace TestMandiri.Repository.Interfaces
         Kategori GetKategoriById(int id);
         void addKategori (Kategori kategori);
         void updateKategori (Kategori kategori);
+        void deleteKategori (int id);
     }
 }

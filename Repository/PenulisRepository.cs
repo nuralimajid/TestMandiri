@@ -1,33 +1,47 @@
-﻿using TestMandiri.Models;
+﻿using TestMandiri.Data;
+using TestMandiri.Models;
 using TestMandiri.Repository.Interfaces;
 
 namespace TestMandiri.Repository
 {
     public class PenulisRepository : IPenulisRepository
     {
+        private readonly AppDBContext _Context;
+        public PenulisRepository(AppDBContext context)
+        {
+            _Context = context;
+        }
+
         public void addPenulis(Penulis penulis)
         {
-            throw new NotImplementedException();
+            _Context.Penulis.Add(penulis);
+            _Context.SaveChanges();
         }
 
         public void deletePenulisById(int id)
         {
-            throw new NotImplementedException();
+            var penulisId = _Context.Penulis.FirstOrDefault(x=>x.Id == id);
+            if(penulisId != null)
+            {
+                _Context.Remove(penulisId);
+                _Context.SaveChanges();
+            }
         }
 
         public IEnumerable<Penulis> GetAll()
         {
-            throw new NotImplementedException();
+            return _Context.Penulis.ToList();
         }
 
         public Penulis GetPenulisById(int id)
         {
-            throw new NotImplementedException();
+            return _Context.Penulis.FirstOrDefault(x=x=>x.Id == id);
         }
 
         public void updatePenulis(Penulis penulis)
         {
-            throw new NotImplementedException();
+            _Context.Penulis.Update(penulis);
+            _Context.SaveChanges();
         }
     }
 }
