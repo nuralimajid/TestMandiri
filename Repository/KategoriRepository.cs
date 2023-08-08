@@ -1,28 +1,47 @@
-﻿using TestMandiri.Models;
+﻿using TestMandiri.Data;
+using TestMandiri.Models;
 using TestMandiri.Repository.Interfaces;
 
 namespace TestMandiri.Repository
 {
     public class KategoriRepository : IKategoriRepository
     {
+        private readonly AppDBContext _Context;
+        public KategoriRepository(AppDBContext context)
+        {
+            _Context = context;
+        }
+
         public void addKategori(Kategori kategori)
         {
-            throw new NotImplementedException();
+            _Context.Kategori.Add(kategori);
+            _Context.SaveChanges();
         }
 
         public IEnumerable<Kategori> GetAll()
         {
-            throw new NotImplementedException();
+            return _Context.Kategori.ToList();
         }
 
         public Kategori GetKategoriById(int id)
         {
-            throw new NotImplementedException();
+            return _Context.Kategori.FirstOrDefault(x => x.Id == id);
         }
 
         public void updateKategori(Kategori kategori)
         {
-            throw new NotImplementedException();
+            _Context.Kategori.Update(kategori);
+            _Context.SaveChanges();
+        }
+
+        public void deleteKategori(int id)
+        {
+            var kategoriId = _Context.Kategori.FirstOrDefault(x=>x.Id == id);
+            if(kategoriId != null)
+            {
+                _Context.Remove(kategoriId);
+                _Context.SaveChanges();
+            }
         }
     }
 }
