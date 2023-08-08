@@ -35,7 +35,7 @@ namespace TestMandiri.Repository
 
         public Penulis GetPenulisById(int id)
         {
-            return _Context.Penulis.FirstOrDefault(x=x=>x.Id == id);
+            return _Context.Penulis.FirstOrDefault(x=>x.Id == id);
         }
 
         public void updatePenulis(Penulis penulis)
@@ -43,5 +43,6 @@ namespace TestMandiri.Repository
             _Context.Penulis.Update(penulis);
             _Context.SaveChanges();
         }
+
     }
 }
