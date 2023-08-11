@@ -9,6 +9,7 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        IConfiguration configuration = builder.Configuration;
         var connectionString = builder.Configuration.GetConnectionString("testDBM");
         builder.Services.AddDbContext<AppDBContext>(options =>
             options.UseSqlServer(connectionString));
